@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.nocotom</groupId>
-    <artifactId>flink-example</artifactId>
+    <artifactId>music-streaming</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>flink-example-base</module>
+        <module>core</module>
     </modules>
 
     <properties>
