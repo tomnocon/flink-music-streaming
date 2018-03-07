@@ -17,6 +17,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <scala.version>2.12.3</scala.version>
+        <scala.binary.version>2.12</scala.binary.version>
         <encoding>UTF-8</encoding>
         <scala-maven-plugin.version>3.3.1</scala-maven-plugin.version>
     </properties>
