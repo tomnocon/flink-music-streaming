@@ -1,25 +1,19 @@
 package com.nocotom.ms.input
 
-import java.util.concurrent.TimeUnit
-
+import scala.concurrent.duration._
 import com.nocotom.ms.model._
 
 object Songs {
   val SONGS = List(
-    new Song("Yellow Submarine", "The Beatles", this.toMillis(2, 40)),
-    new Song("Get Off Of My Cloud", "The Rolling Stones", this.toMillis(2, 59)),
-    new Song("Let It Bleed", "The Rolling Stones", this.toMillis(5, 28)),
-    new Song("Dancing Queen", "Abba", this.toMillis(3, 51)),
-    new Song("Rolling in the Deep", "Adele", this.toMillis(3, 53)),
-    new Song("Killer Queen", "Queen", this.toMillis(3, 11)),
-    new Song("California Gurls", "Katy Perry", this.toMillis(3, 54)),
-    new Song("Silent All These Years", "Tori Amos", this.toMillis(4, 57)),
-    new Song("Bohemian Rhapsody", "Queen", this.toMillis(6, 6)),
-    new Song("I want to break free", "Queen", this.toMillis(4, 32))
+    new Song("Yellow Submarine", "The Beatles", 2.4.second),
+    new Song("Get Off Of My Cloud", "The Rolling Stones", 2.59.second),
+    new Song("Let It Bleed", "The Rolling Stones", 5.28.second),
+    new Song("Dancing Queen", "Abba", 3.51.second),
+    new Song("Rolling in the Deep", "Adele", 3.53.second),
+    new Song("Killer Queen", "Queen", 3.11.second),
+    new Song("California Gurls", "Katy Perry", 3.54.second),
+    new Song("Silent All These Years", "Tori Amos", 4.57.second),
+    new Song("Bohemian Rhapsody", "Queen", 6.6.second),
+    new Song("I want to break free", "Queen", 4.32.second)
   )
-
-  private def toMillis(minutes: Int, seconds: Int): Int = {
-    val totalMillis = TimeUnit.MINUTES.toMillis(minutes) + TimeUnit.SECONDS.toMillis(minutes)
-    totalMillis.asInstanceOf[Int]
-  }
 }
