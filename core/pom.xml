@@ -12,18 +12,67 @@
 
     <artifactId>music-streaming-core</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>io.monix</groupId>
-            <artifactId>monix_${scala.binary.version}</artifactId>
-            <version>3.0.0-M3</version>
-        </dependency>
-        <dependency>
-            <groupId>io.monix</groupId>
-            <artifactId>monix-execution_${scala.binary.version}</artifactId>
-            <version>3.0.0-M3</version>
-        </dependency>
-    </dependencies>
-
-    
+    <build>
+        <plugins>
+            <!-- self-contained jars for each example -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>FilterSongs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>FilterSongs</classifier>
+                            <archive>
+                                <manifestEntries>
+                                    <program-class>com.nocotom.ms.FilterSongs</program-class>
+                                </manifestEntries>
+                            </archive>
+                            <includes>
+                                <include>com/nocotom/ms/**/*.class</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>fat-jar-filter-songs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <shadeTestJar>false</shadeTestJar>
+                            <shadedArtifactAttached>false</shadedArtifactAttached>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.nocotom.ms.FilterSongs</mainClass>
+                                </transformer>
+                            </transformers>
+                            <finalName>FilterSongs</finalName>
+                            <filters>
+                                <filter>
+                                    <artifact>*</artifact>
+                                    <includes>
+                                        <include>com/nocotom/ms/**</include>
+                                    </includes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+        </plugins>
+    </build>
 </project>
