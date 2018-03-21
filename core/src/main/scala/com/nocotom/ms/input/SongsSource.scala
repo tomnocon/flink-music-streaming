@@ -1,27 +1,21 @@
 package com.nocotom.ms.input
 
-import akka.actor._
 import com.nocotom.ms.model._
 import org.apache.flink.streaming.api.functions.source.{RichParallelSourceFunction, SourceFunction}
 
-import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 import scala.util.Random
 
 class SongsSource(numberOfUsers: Int, period: FiniteDuration) extends RichParallelSourceFunction[SongEvent] {
 
-  private var running : Boolean = true
+  private lazy val locker = new Locker()
 
-  override def cancel(): Unit = running = false
+  override def cancel(): Unit = locker.open()
 
   override def run(sourceContext: SourceFunction.SourceContext[SongEvent]): Unit = {
     val random = new Random
 
-    val system = ActorSystem.create()
-
-    // schedule worker at fixed rate
-    val cancellable = system.scheduler.schedule(2.seconds, period) {
-
+    while(!locker.await(period)){
       // random values
       val userId = random.nextInt(numberOfUsers)
       val songIndex = random.nextInt(Songs.SONGS.length)
@@ -33,12 +27,5 @@ class SongsSource(numberOfUsers: Int, period: FiniteDuration) extends RichParall
       // publish event
       sourceContext.collect(songEvent)
     }
-
-    while (running) {
-      Thread.sleep(10L)
-    }
-
-    cancellable.cancel()
-    system.terminate()
   }
 }
