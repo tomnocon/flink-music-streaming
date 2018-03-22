@@ -20,7 +20,7 @@ class Locker {
     var remaining = timeout
     var isBraked = false
     while (!_isOpen && !isBraked) {
-      wait(timeout.toMillis)
+      wait(remaining.toMillis)
       if(timeout > 0.second){
         remaining = timeout - now - start
         if(remaining <= 0.second){
